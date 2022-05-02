@@ -15,3 +15,25 @@
     <p>Document: The Django template language</p>
     <a href="https://docs.djangoproject.com/en/4.0/topics/templates" target="_blank"></a>
 </div>
+
+
+<h2>Write a minimal form in part 4</h2>
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ question.question_text }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+</fieldset>
+<input type="submit" value="Vote">
+</form>
+
+
+
+<hr>
+<h4><strong>Important:</strong></h4>
+<p>Use: forloop, choice_set</p>
